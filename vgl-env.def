@@ -1,0 +1,42 @@
+BootStrap: localimage
+# Based on the base apptainer (Check Carefully!!)
+From: /mnt/petrelfs/share_data/zhouenshen/apptainer/base-vgl-env.sif
+
+%post
+    # Go into git clone code root location (Check Carefully!!)
+    cd /mnt/petrelfs/zhouenshen/code/MineSteve
+
+    # Add +x to all scripts (Check Carefully!!)
+    chmod +x train/*.sh
+    chmod +x run_agent/*.sh
+
+    # Activate the 'minerl' environment and install libraries
+    . /opt/conda/etc/profile.d/conda.sh
+    conda activate minerl
+
+    # Install local package
+    pip install -e .
+
+%environment
+    TZ=UTC
+    REFRESH=60
+    PASSWD=mypasswd
+    NOVNC_ENABLE=false
+    WEBRTC_ENCODER=nvh264enc
+    WEBRTC_ENABLE_RESIZE=false
+    ENABLE_AUDIO=false
+    ENABLE_BASIC_AUTH=true
+    LANG=en_US.UTF-8
+    LANGUAGE=en_US:en
+    LC_ALL=en_US.UTF-8
+    DISPLAY=:0
+    VGL_REFRESHRATE=60
+    VGL_ISACTIVE=1
+    VGL_DISPLAY=egl
+    VGL_WM=1
+    NVIDIA_DRIVER_CAPABILITIES=all
+    PULSE_SERVER=127.0.0.1:4713
+    CONDA_DIR=/opt/conda
+    export PATH="/opt/conda/bin:$PATH"
+    . /opt/conda/etc/profile.d/conda.sh
+    conda activate minerl
