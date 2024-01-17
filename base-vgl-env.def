@@ -166,7 +166,7 @@ From: nvcr.io/nvidia/cudagl:11.4.2-runtime-ubuntu20.04
     conda install -y git
     conda install -c "nvidia/label/cuda-11.4.2" cuda-toolkit
     conda install -c anaconda cudnn
-    conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+    conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
 
     # Python libraries
     pip install -U pip
