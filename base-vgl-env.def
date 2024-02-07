@@ -169,14 +169,29 @@ From: nvcr.io/nvidia/cudagl:11.4.2-runtime-ubuntu20.04
     conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
 
     # Python libraries
-    pip install -U pip
-    pip install pyyaml
-    pip install git+https://github.com/minerllabs/minerl
+    pip install --no-cache-dir pip -U
+    
+    # MineRL
+    pip install --no-cache-dir git+https://github.com/Zhoues/minerl
 
+    # Gym & MineCLIP
     pip install --no-cache-dir git+https://github.com/openai/gym.git@9180d12e1b66e7e2a1a622614f787a6ec147ac40
     pip install --no-cache-dir git+https://github.com/Zhoues/MineCLIP
     pip install --no-cache-dir gym==0.19 gym3 attrs opencv-python
-    pip install --no-cache-dir gdown tqdm accelerate wandb -U
+    
+    # Python libraries
+    pip install --no-cache-dir -U pyyaml
+    pip install --no-cache-dir -U gdown tqdm accelerate wandb
+    pip install --no-cache-dir -U ipdb
+    pip install --no-cache-dir -U openai
+    pip install --no-cache-dir -U langchain
+    pip install --no-cache-dir -U chromadb
+    pip install --no-cache-dir -U tiktoken
+    pip install --no-cache-dir -U pyyaml
+    pip install --no-cache-dir -U langchain-openai
+    pip install --no-cache-dir -U langchain-community
+    pip install --no-cache-dir --upgrade --quiet  langchain-experimental
+    pip install --no-cache-dir -U open_clip_torch
 
     # Fix the bug of MineCLIP for python=3.10
     conda install chardet
