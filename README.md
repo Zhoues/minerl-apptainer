@@ -6,14 +6,16 @@ The entire project environment is composed of two parts: one is the MineRL envir
 
 # MineRL Env Setup
 Due to the challenges in setting up the MineRL environment, we provide two different methods to install the MineRL environment:
-1. Normal Installation Procedure:
+1. Normal Installation Procedure (Recommend):
     - Advantage: It's flexible, allowing installation of desired packages through apt or pip at any time.
     - Disadvantage: Approximately 7GB of memory is necessary to compile the MineRL environment, which is hard for many machines.
 2. Using the Provided Apptainer Container:
-    - Advantage: Ensures runnable environment and eliminates potential errors during the installation process. It also supports headless GPU rendering by VGL, which is **much faster than the CPU rendering.**
+    - Advantage: Ensures runnable environment and eliminates potential errors during the installation process. It also supports headless GPU rendering by VGL, which is  faster than the CPU rendering.
     - Disadvantage: Any additional packages requiring apt or pip installation will necessitate container modification which may be time-consuming.
 
-## Method 1: Normal Installation Procedure
+## Method 1: Normal Installation Procedure (Recommend)
+<details> <summary>Expand to view Method 1.</summary>
+
 We recommend running on linux using a conda environment, with python 3.10.
 1. Install PyTorch 2.0: `conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia`
 2. Install MineRL: `pip install git+https://github.com/Zhoues/minerl`
@@ -45,9 +47,11 @@ We recommend running on linux using a conda environment, with python 3.10.
 If you are running on a headless server, you need to install `xvfb` and run each python script with `xvfb-run`. For example, `xvfb-run python script_name.py`.
 
 Also, notice that we use the MineRL environment, not the MineDojo environment. Thus, setting `MINEDOJO_HEADLESS=1` as mentioned in the 'MineDojo Installation' instructions will have no effect.
+</details>
 
 
 ## Method 2: Using the Provided Apptainer Container
+<details> <summary>Expand to view Method 2.</summary>
 
 We provide a pre-compiled Apptainer container. Compared to Docker, the Apptainer container requires fewer permissions making it suitable for use in a cluster environment like slurm.
 
@@ -99,19 +103,25 @@ If you are runing on a server with head, you can use `sudo apptainer exec -w --n
 - If you are using Wandb, you will need to specify the Wandb API key for remote monitoring. This can be done adding the following flag to the above command before vgl-env: `... --env WANDB_API_KEY=XXXXXXXXXXXXXXXXX vgl-env...`.
 
 ### Running on a headless server (with GPU rending)
-If you are running on a headless server, you can use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/MineDreamer xvfb-run /opt/conda/envs/minerl/bin/python script_name.py` or `srun -p  <your virtual partition> apptainer exec ...(like above)`. For detailed meanings of the parameters of apptainer, refer to the previous part. 
+If you are running on a headless server, you can use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env xvfb-run /opt/conda/envs/minerl/bin/python script_name.py`. For detailed meanings of the parameters of apptainer, refer to the previous part. 
 
 If you want to use GPU rendering, you need to create a script `script_name.sh` for your `script_name.py` like the following:
 ```bash
 vglrun /opt/conda/envs/minerl/bin/python script_name.py # GPU Rendering
 ```
-and then use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env bash setupvgl.sh script_name.sh` or `srun -p  <your virtual partition> apptainer exec ...(like above)`. 
+and then use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env bash setupvgl.sh script_name.sh`.
 
 **It's worth noting that you should likely change the permissions of `script_name.sh` to `+x` using `chmod`.**
+
+</details>
 
 
 
 ## 3. Test your MineRL Env
+
+<details> <summary>Expand to view Test Method.</summary>
+
+
 In MineDreamer repo, there is an `env_valid.py` to test the environment
 - For standard installation and the server is headful, please test using the following command: `python env_valid.py`.
 - For standard installation and the server is headless, please test using the following command: `xvfb-run python env_valid.py`.
@@ -120,6 +130,11 @@ In MineDreamer repo, there is an `env_valid.py` to test the environment
 
 If an image appears in the current directory, showing an agent in front of a sheep holding a diamond axe, this means the environment has been successfully installed.
 
+</details>
+
+
+
+
 # Imaginator Env
 
-coming soon
+Coming soon
