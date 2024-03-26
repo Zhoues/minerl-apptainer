@@ -1,15 +1,17 @@
 BootStrap: localimage
 # Based on the base apptainer (Check Carefully!!)
-From: /mnt/petrelfs/share_data/zhouenshen/apptainer/base-vgl-env.sif
+From: # The absolute path of base-vgl-env.sif like `/path/to/minedreamer/base-vgl-env.sif`.
 
 %post
     # Go into git clone code root location (Check Carefully!!)
-    cd /mnt/petrelfs/zhouenshen/code/MineSteve
+    cd # The absolute path of MineDreamer folder like `/path/to/minedreamer`
 
     # Add +x to all scripts (Check Carefully!!)
     chmod +x setupvgl.sh
     chmod +x train/*.sh
-    chmod +x run_agent/*.sh
+    chmod +x make_dataset/*.sh
+    chmod +x play/*.sh
+
 
     # Activate the 'minerl' environment and install libraries
     . /opt/conda/etc/profile.d/conda.sh
