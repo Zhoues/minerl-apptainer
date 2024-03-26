@@ -57,7 +57,7 @@ We provide a pre-compiled Apptainer container. Compared to Docker, the Apptainer
 
     gdown https://drive.google.com/uc?id=1cOF5Bf6DEvuLXMrY-JCVT2XxDHDosgqU -O base-vgl-env.sif
     ```
-    - Note: This environment has already completed steps 1 to 5 of the Normal Installation Procedure，and it supports headless GPU rendering by VGL. **If you are faced with `Too many users have viewed or downloaded this file recently...`, please email to me and I will give your another linke, or use the method like [this](https://stackoverflow.com/questions/65312867/how-to-download-large-file-from-google-drive-from-terminal-gdown-doesnt-work)**
+    - Note: This environment has already completed steps 1 to 5 of the Normal Installation Procedure，and it supports headless GPU rendering by VGL. **If you are faced with `Too many users have viewed or downloaded this file recently...`, please email to me and I will give you another link, or use the method like [this](https://stackoverflow.com/questions/65312867/how-to-download-large-file-from-google-drive-from-terminal-gdown-doesnt-work)**
 2. Clone this repo and move `vgl-env.def`, `base-vgl-env.sif`, `setupvgl.sh` of this repo to the same level as minedreamer: 
     ```
     MineDreamer
@@ -106,11 +106,12 @@ If you want to use GPU rendering, you need to create a script `script_name.sh` f
 vglrun /opt/conda/envs/minerl/bin/python script_name.py # GPU Rendering
 ```
 and then use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env bash setupvgl.sh script_name.sh` or `srun -p  <your virtual partition> apptainer exec ...(like above)`. 
-It's worth noting that you should likely change the permissions of `script_name.sh` to `+x` using `chmod`. Under normal circumstances, the permissions are modified when compiling the final container in step 4.
+
+**It's worth noting that you should likely change the permissions of `script_name.sh` to `+x` using `chmod`.**
 
 
 
-## 3. Test your MineRL env
+## 3. Test your MineRL Env
 In MineDreamer repo, there is an `env_valid.py` to test the environment
 - For standard installation and the server is headful, please test using the following command: `python env_valid.py`.
 - For standard installation and the server is headless, please test using the following command: `xvfb-run python env_valid.py`.
@@ -118,6 +119,6 @@ In MineDreamer repo, there is an `env_valid.py` to test the environment
 - If you have installed via apptainer container and the server is headless, please test using the following command: `sudo apptainer exec -w --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env xvfb-run /opt/conda/envs/minerl/bin/python env_valid.py` and cluster is similar.
 
 
-# Imaginator env
+# Imaginator Env
 
 coming soon
