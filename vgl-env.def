@@ -8,9 +8,7 @@ From: # The absolute path of base-vgl-env.sif like `/path/to/minedreamer/base-vg
 
     # Add +x to all scripts (Check Carefully!!)
     chmod +x setupvgl.sh
-    # chmod +x train/*.sh
-    # chmod +x make_dataset/*.sh
-    # chmod +x play/*.sh
+    chmod +x play/*.sh
 
 
     # Activate the 'minerl' environment and install libraries

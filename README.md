@@ -2,7 +2,7 @@
 
 The entire project environment is composed of two parts: one is the MineRL environment for Agent, and the other is the Imaginator environment for Imaginator. The interaction between the Agent in MineRL and Imaginator is accomplished through backend communication.
 
-**The contained files in this repository are for installing the MineRL container environment, and are unrelated to the Imaginator and normal installation procedures for MineRL.**
+**The contained files in this repository are for installing the MineRL container environment by using provided container , and are unrelated to the normal installation procedures for MineRL.**
 
 # MineRL Env Setup
 Due to the challenges in setting up the MineRL environment, we provide two different methods to install the MineRL environment:
@@ -122,19 +122,12 @@ and then use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/M
 <details> <summary>Expand to view Test Method.</summary>
 
 
-In MineDreamer repo, there is an `env_valid.py` to test the environment
-- For standard installation and the server is headful, please test using the following command: `python env_valid.py`.
-- For standard installation and the server is headless, please test using the following command: `xvfb-run python env_valid.py`.
-- If you have installed via apptainer container and the server is headful, please test using the following command: `sudo apptainer exec -w --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env /opt/conda/envs/minerl/bin/python env_valid.py` and cluster is similar.
-- If you have installed via apptainer container and the server is headless, please test using the following command: `sudo apptainer exec -w --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env xvfb-run /opt/conda/envs/minerl/bin/python env_valid.py` and cluster is similar.
+In MineDreamer repo, there is an `minerl_env_valid.py` to test the environment
+- For standard installation and the server is headful, please test using the following command: `python minerl_env_valid.py`.
+- For standard installation and the server is headless, please test using the following command: `xvfb-run python minerl_env_valid.py`.
+- If you have installed via apptainer container and the server is headful, please test using the following command: `sudo apptainer exec -w --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env /opt/conda/envs/minerl/bin/python minerl_env_valid.py` and cluster is similar.
+- If you have installed via apptainer container and the server is headless, please test using the following command: `sudo apptainer exec -w --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env xvfb-run /opt/conda/envs/minerl/bin/python minerl_env_valid.py` and cluster is similar.
 
 If an image appears in the current directory, showing an agent in front of a sheep holding a diamond axe, this means the environment has been successfully installed.
 
 </details>
-
-
-
-
-# Imaginator Env
-
-Coming soon
