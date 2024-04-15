@@ -2,16 +2,16 @@
 
 The entire project environment is composed of two parts: one is the MineRL environment for Agent, and the other is the Imaginator environment for Imaginator. The interaction between the Agent in MineRL and Imaginator is accomplished through backend communication.
 
-**The contained files in this repository are for installing the MineRL container environment by using provided container , and are unrelated to the normal installation procedures for MineRL.**
+**The contained files in this repository are for installing the MineRL container environment by using provided container and are unrelated to the normal installation procedures for MineRL.**
 
 # MineRL Env Setup
 Due to the challenges in setting up the MineRL environment, we provide two different methods to install the MineRL environment:
 1. Normal Installation Procedure (Recommend):
     - Advantage: It's flexible, allowing installation of desired packages through apt or pip at any time.
     - Disadvantage: Approximately 7GB of memory is necessary to compile the MineRL environment, which is hard for many machines.
-        - <span style="color:red;">If you encounter any errors related to `gradlew` and `gradle` while installing minerl</span>, it is likely due to insufficient memory on your machine, preventing the compilation of the MineRL environment from completing.
+        - **Suppose you encounter any errors related to `gradlew` and `gradle` while installing MineRL. In that case, it is likely due to insufficient memory on your machine, preventing the compilation of the MineRL environment from completing.**
 2. Using the Provided Apptainer Container:
-    - Advantage: Ensures runnable environment and eliminates potential errors during the installation process. It also supports headless GPU rendering by VGL, which is  faster than the CPU rendering.
+    - Advantage: Ensures a runnable environment and eliminates potential errors during the installation process. It also supports headless GPU rendering by VGL, which is  faster than CPU rendering.
     - Disadvantage: Any additional packages requiring apt or pip installation will necessitate container modification which may be time-consuming.
 
 ## Method 1: Normal Installation Procedure (Recommend)
