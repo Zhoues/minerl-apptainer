@@ -9,6 +9,7 @@ Due to the challenges in setting up the MineRL environment, we provide two diffe
 1. Normal Installation Procedure (Recommend):
     - Advantage: It's flexible, allowing installation of desired packages through apt or pip at any time.
     - Disadvantage: Approximately 7GB of memory is necessary to compile the MineRL environment, which is hard for many machines.
+        - <span style="color:red;">If you encounter any errors related to `gradlew` and `gradle` while installing minerl</span>, it is likely due to insufficient memory on your machine, preventing the compilation of the MineRL environment from completing.
 2. Using the Provided Apptainer Container:
     - Advantage: Ensures runnable environment and eliminates potential errors during the installation process. It also supports headless GPU rendering by VGL, which is  faster than the CPU rendering.
     - Disadvantage: Any additional packages requiring apt or pip installation will necessitate container modification which may be time-consuming.
