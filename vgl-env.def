@@ -8,8 +8,7 @@ From: # The absolute path of base-vgl-env.sif like `/path/to/minedreamer/base-vg
 
     # Add +x to all scripts (Check Carefully!!)
     chmod +x setupvgl.sh
-    chmod +x play/*.sh
-
+    find play -type f -name "*.sh" -exec chmod +x {} \;
 
     # Activate the 'minerl' environment and install libraries
     . /opt/conda/etc/profile.d/conda.sh

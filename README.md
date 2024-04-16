@@ -13,6 +13,7 @@ Due to the challenges in setting up the MineRL environment, we provide two diffe
 2. Using the Provided Apptainer Container:
     - Advantage: Ensures a runnable environment and eliminates potential errors during the installation process. It also supports headless GPU rendering by VGL, which is  faster than CPU rendering.
     - Disadvantage: Any additional packages requiring apt or pip installation will necessitate container modification which may be time-consuming.
+    - **Disadvantage 2: Even if your machine has a head, it can only operate in a headless manner.**
 
 ## Method 1: Normal Installation Procedure (Recommend)
 <details> <summary>Expand to view Method 1.</summary>
@@ -86,31 +87,28 @@ We provide a pre-compiled Apptainer container. Compared to Docker, the Apptainer
     ...
     ```
 4. Compile the final Apptainer environment: 
-    -  If you are using a standalone machine: `sudo apptainer build  --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env.sif vgl-env.def` 
-    -  If you are using a cluster like slurm: `srun -p <your virtual partition> apptainer build ...(like above)`
-        - `--bind`: The local directory you want to mount additionally in the container.
-        - Note: After compiling, there will be a `vgl-env.sif` in the folder. **If you want to install additional package in the container, you can add the bash command after `# Install local package` part in `vgl-env.def` and re-compile this final container.**
+    -  If you are using a standalone machine: `sudo apptainer build  --bind /MineDreamer_top_level_directory:/MineDreamer_top_level_directory vgl-env.sif vgl-env.def`. If you are using a cluster like slurm: `srun -p <your virtual partition> apptainer build ...(like above)`
+
+    - `--bind`: The local directory you want to mount additionally in the container. `/MineDreamer_top_level_directory` means that if MineDreamer absolute path is like `/home/xxx/MineDreamer`, it should be `/home`.
+    - Note: After compiling, there will be a `vgl-env.sif` in the folder. **If you want to install additional package in the container, you can add the bash command after `# Install local package` part in `vgl-env.def` and re-compile this final container.**
 
 5. Turn the final container into writable sandbox, because minerl env will create running logs while `.sif` is read only.
     -  If you are using a standalone machine: `sudo apptainer build --sandbox vgl-env/ vgl-env.sif` 
     -  If you are using a cluster like slurm: `srun -p  <your virtual partition> apptainer build ...(like above)`
 
 
-### Running on a server with head
-If you are runing on a server with head, you can use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env /opt/conda/envs/minerl/bin/python script_name.py`.
+### Running on a headless server (even if your server has a head)
+If you are running on a headless server, you can use `sudo apptainer exec -w --nv --bind /MineDreamer_top_level_directory:/MineDreamer_top_level_directory vgl-env xvfb-run /opt/conda/envs/minerl/bin/python script_name.py`.
+- `--bind`: The local directory you want to mount additionally in the container. `/MineDreamer_top_level_directory` means that if MineDreamer absolute path is like `/home/xxx/MineDreamer`, it should be `/home`.
 - `--nv`: nvidia flag to enable GPU capabilities. **If you don't use GPU, please remove it**. (some warnings will raise but ignore them)
 - `-w`: enable writting inside the container.
-- `--bind`: The local directory you want to mount additionally in the container. 
 - If you are using Wandb, you will need to specify the Wandb API key for remote monitoring. This can be done adding the following flag to the above command before vgl-env: `... --env WANDB_API_KEY=XXXXXXXXXXXXXXXXX vgl-env...`.
-
-### Running on a headless server (with GPU rending)
-If you are running on a headless server, you can use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env xvfb-run /opt/conda/envs/minerl/bin/python script_name.py`. For detailed meanings of the parameters of apptainer, refer to the previous part. 
 
 If you want to use GPU rendering, you need to create a script `script_name.sh` for your `script_name.py` like the following:
 ```bash
 vglrun /opt/conda/envs/minerl/bin/python script_name.py # GPU Rendering
 ```
-and then use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env bash setupvgl.sh script_name.sh`.
+and then use `sudo apptainer exec -w --nv --bind /MineDreamer_top_level_directory:/MineDreamer_top_level_directory vgl-env bash setupvgl.sh script_name.sh`.
 
 **It's worth noting that you should likely change the permissions of `script_name.sh` to `+x` using `chmod`.**
 
@@ -126,8 +124,7 @@ and then use `sudo apptainer exec -w --nv --bind /path/to/MineDreamer:/path/to/M
 In MineDreamer repo, there is an `minerl_env_valid.py` to test the environment
 - For standard installation and the server is headful, please test using the following command: `python minerl_env_valid.py`.
 - For standard installation and the server is headless, please test using the following command: `xvfb-run python minerl_env_valid.py`.
-- If you have installed via apptainer container and the server is headful, please test using the following command: `sudo apptainer exec -w --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env /opt/conda/envs/minerl/bin/python minerl_env_valid.py` and cluster is similar.
-- If you have installed via apptainer container and the server is headless, please test using the following command: `sudo apptainer exec -w --bind /path/to/MineDreamer:/path/to/MineDreamer vgl-env xvfb-run /opt/conda/envs/minerl/bin/python minerl_env_valid.py` and cluster is similar.
+- If you have installed via apptainer container, please test using the following command: `sudo apptainer exec -w --bind /MineDreamer_top_level_directory:/MineDreamer_top_level_directory vgl-env xvfb-run /opt/conda/envs/minerl/bin/python minerl_env_valid.py` and cluster is similar.
 
 If an image appears in the current directory, showing an agent in front of a sheep holding a diamond axe, this means the environment has been successfully installed.
 
