@@ -64,12 +64,14 @@ We provide a pre-compiled Apptainer container. Compared to Docker, the Apptainer
     gdown https://drive.google.com/uc?id=1cOF5Bf6DEvuLXMrY-JCVT2XxDHDosgqU -O base-vgl-env.sif
     ```
     - Note: This environment has already completed steps 1 to 5 of the Normal Installation Procedure，and it supports headless GPU rendering by VGL. **If you are faced with `Too many users have viewed or downloaded this file recently...`, please email to me and I will give you another link, or use the method like [this](https://stackoverflow.com/questions/65312867/how-to-download-large-file-from-google-drive-from-terminal-gdown-doesnt-work)**
-2. Clone this repo and move `vgl-env.def`, `base-vgl-env.sif`, `setupvgl.sh` of this repo to the same level as minedreamer in the MineDreamer Repo, which you should first git clone it: 
+2. Clone this repo and move `vgl-env.def`, `base-vgl-env.sif`, `setupvgl.sh` of this repo to the same level as minedreamer in the MineDreamer Repo, which you should first git clone: 
     ```
     MineDreamer
     ├── README.md
     ├── minedreamer
     │   ├── agent code.
+    ├── imaginator
+    │   ├── imaginator code.
     ├── vgl-env.def: Install final container locally, and if you want to install additional package, just modify this file
     ├── base-vgl-env.sif: pre-compiled Apptainer container
     ├── setupvgl.sh: supports headless GPU rendering by VGL
