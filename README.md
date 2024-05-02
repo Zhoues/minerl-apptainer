@@ -8,8 +8,7 @@ The entire project environment is composed of two parts: one is the MineRL envir
 Due to the challenges in setting up the MineRL environment, we provide two different methods to install the MineRL environment:
 1. Normal Installation Procedure (Recommend):
     - Advantage: It's flexible, allowing installation of desired packages through apt or pip at any time.
-    - Disadvantage: Approximately 7GB of memory is necessary to compile the MineRL environment, which is hard for many machines.
-        - **Suppose you encounter any errors related to `gradlew` and `gradle` while installing MineRL. In that case, it is likely due to insufficient memory on your machine, preventing the compilation of the MineRL environment from completing.**
+    - Disadvantage: Approximately 7GB of memory and fast Internet speed are necessary to compile the MineRL environment, which is hard for many machines.
 2. Using the Provided Apptainer Container:
     - Advantage: Ensures a runnable environment and eliminates potential errors during the installation process. It also supports headless GPU rendering by VGL, which is  faster than CPU rendering.
     - Disadvantage: Any additional packages requiring apt or pip installation will necessitate container modification which may be time-consuming.
@@ -22,7 +21,7 @@ We recommend running on linux using a conda environment, with python 3.10.
 1. Install PyTorch 2.0: `conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia`
 2. Install MineRL: `pip install git+https://github.com/Zhoues/minerl`
     - See [MineRL Installation](https://minerl.readthedocs.io/en/latest/tutorials/index.html) for more details on how to setup MineRL
-    - Note: We choose not to use the official MineRL repository. This decision is made because our repository adds the feature of `chat` action on top of MineRL, which allows setting agent initialization conditions through commands, making it more convenient for us to test the Agent.
+    - Note: We choose not to use the official MineRL repository. This decision is made because our repository adds the feature of `chat` action on top of MineRL, which allows setting agent initialization conditions through commands, making it more convenient for us to test the Agent. **Suppose you encounter any errors related to `gradlew` and `gradle` while installing MineRL. In that case, it is likely due to insufficient memory on your machine or the Internet speed is not fast enough, preventing the compilation of the MineRL environment from completing. You can refer to this [issue](https://github.com/Zhoues/MineDreamer/issues/2#issuecomment-2082253619) to get the compiled MineRL .whl**.
 3. Install MineDojo and MineCLIP: 
     ```bash
     pip install git+https://github.com/openai/gym.git@9180d12e1b66e7e2a1a622614f787a6ec147ac40
